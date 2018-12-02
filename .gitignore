@@ -1,5 +1,5 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
-base.js
+
 # dependencies
 /node_modules
 
@@ -8,7 +8,7 @@ base.js
 
 # production
 /build
-
+baseF.js
 # misc
 .DS_Store
 .env.local
