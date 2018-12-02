@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Loader from "./Loader";
 import firebase from "firebase";
+import { Card, CardMedia } from "@material-ui/core";
 import GridList from "@material-ui/core/GridList";
 import GridListTile from "@material-ui/core/GridListTile";
 import GridListTileBar from "@material-ui/core/GridListTileBar";
@@ -209,6 +210,9 @@ class PlatList extends Component {
   }
 
   render() {
+    console.log("=============tous les plats=======================");
+    console.log(this.state.plat);
+    console.log("====================================");
     const { user } = this.props;
     if (this.state.loading) {
       return <Loader />;
@@ -222,17 +226,10 @@ class PlatList extends Component {
             flexWrap: "wrap",
             justifyContent: "space-around",
             overflow: "hidden",
-            marginTop: "35px",
+            marginTop: "100px",
             marginBottom: "60px"
           }}
         >
-          <Paper style={{ marginTop: 30, marginBottom: 20 }}>
-            <Grid container spacing={24}>
-              <Grid item xs={12}>
-                <SearchBar />
-              </Grid>
-            </Grid>
-          </Paper>
           <GridList
             cellHeight={200}
             spacing={1}
@@ -246,14 +243,14 @@ class PlatList extends Component {
                   rows={tile.featured ? 2 : 1}
                 >
                   <img
-                    src={this.state.plat[tile].image}
+                    src={this.state.plat[tile].photoDuPlat}
                     alt={this.state.plat[tile].nom}
                   />
                   <GridListTileBar
                     title={this.Capitalize(this.state.plat[tile].restaurant)}
                     subtitle={
                       <span>
-                        {this.Capitalize(this.state.plat[tile].adresse)}
+                        {this.Capitalize(this.state.plat[tile].ville)}
                       </span>
                     }
                     actionIcon={

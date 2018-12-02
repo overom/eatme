@@ -225,7 +225,7 @@ class FavorisList extends Component {
                       />
                       <CardMedia
                         className={classes.media}
-                        image={user[keyUser].favoris[elt].plat.image}
+                        image={user[keyUser].favoris[elt].plat.photoDuPlat}
                         title="Photo du plat"
                       />
                       <CardContent>

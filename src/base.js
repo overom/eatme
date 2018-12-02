@@ -1,5 +1,5 @@
 export default {
-  apiKey: "AIzaSyAS14HEHew2ObWyw7mlJyKZ-Wg_tofV7cI",
+  apiKey: "AIzaSyC61qyJSN22FuVKb8s5FeG59ZtaVtX1j2o",
   authDomain: "eatme-95e9d.firebaseapp.com",
   databaseURL: "https://eatme-95e9d.firebaseio.com",
   projectId: "eatme-95e9d",

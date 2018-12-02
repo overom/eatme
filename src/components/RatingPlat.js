@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FileUploader from "react-firebase-file-uploader";
 import firebase from "firebase";
 import StarRatingComponent from "react-star-rating-component";
 import {
@@ -66,6 +67,7 @@ class RatingPlat extends Component {
     this.state = {
       nom: "",
       restaurant: "",
+      adresse: "",
       ville: "",
       prix: 0,
       favoris: "false",
@@ -74,7 +76,8 @@ class RatingPlat extends Component {
       note: 0,
       service: 0,
       ambiance: 0,
-      qualitePrix: 0
+      qualitePrix: 0,
+      photoDuPlat: ""
     };
     this.onStarClick = this.onStarClick.bind(this);
   }
@@ -100,6 +103,22 @@ class RatingPlat extends Component {
       .ref()
       .update(updates);
   }
+
+  handleUploadStart = () => this.setState({ isUploading: true, progress: 0 });
+  handleProgress = progress => this.setState({ progress });
+  handleUploadError = error => {
+    this.setState({ isUploading: false });
+    console.error(error);
+  };
+  handleUploadSuccess = filename => {
+    this.setState({ avatar: filename, progress: 100, isUploading: false });
+    firebase
+      .storage()
+      .ref("images")
+      .child(filename)
+      .getDownloadURL()
+      .then(url => this.setState({ photoDuPlat: url }));
+  };
 
   render() {
     const { classes } = this.props;
@@ -146,7 +165,18 @@ class RatingPlat extends Component {
               onChange={this.handleChange("restaurant")}
             />
           </FormControl>
-
+          <FormControl className={classes.formControl}>
+            <FileUploader
+              accept="image/*"
+              name="avatar"
+              randomizeFilename
+              storageRef={firebase.storage().ref("images")}
+              onUploadStart={this.handleUploadStart}
+              onUploadError={this.handleUploadError}
+              onUploadSuccess={this.handleUploadSuccess}
+              onProgress={this.handleProgress}
+            />
+          </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="ville">Ville</InputLabel>
             <Input
